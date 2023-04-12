@@ -9,8 +9,6 @@ import { Fragment } from "react";
 function FilteredEventsPage(props) {
   const router = useRouter();
 
-  console.log("props", props);
-
   if (props.hasError) {
     return (
       <Fragment>
@@ -86,10 +84,3 @@ export async function getServerSideProps(context) {
 
 export default FilteredEventsPage;
 
-/**
- *
- * 1) In SSG => no need to provide a loading state since it will always be prrerendered
- * 2) In SSR => same
- * 3) In SSG => if we are providing fallback we have to give a loading state
- *
- */
