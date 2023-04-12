@@ -3,11 +3,13 @@ import ResultsTitle from "@/components/events/results-title";
 import Button from "@/components/ui/button";
 import ErrorAlert from "@/components/ui/error-alert";
 import { getFilteredEvents } from "@/helpers/api-util";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
 
 function FilteredEventsPage(props) {
-  const router = useRouter();
+
+
 
   if (props.hasError) {
     return (
@@ -41,6 +43,13 @@ function FilteredEventsPage(props) {
 
   return (
     <Fragment>
+      <Head>
+        <title>Filtered Events</title>
+        <meta
+          name="description"
+          content={`All events for ${numMonth}/${numYear}`}
+        />
+      </Head>
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </Fragment>
@@ -49,15 +58,11 @@ function FilteredEventsPage(props) {
 
 export async function getServerSideProps(context) {
   const { params } = context;
-
   const filterData = params.slug;
-
   const filteredYear = filterData[0];
   const filteredMonth = filterData[1];
-
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
-
   if (isNaN(numYear) || isNaN(numMonth)) {
     return {
       props: {
@@ -65,12 +70,10 @@ export async function getServerSideProps(context) {
       },
     };
   }
-
   const filteredEvents = await getFilteredEvents({
     year: numYear,
     month: numMonth,
   });
-
   return {
     props: {
       event: filteredEvents,
@@ -83,4 +86,3 @@ export async function getServerSideProps(context) {
 }
 
 export default FilteredEventsPage;
-
