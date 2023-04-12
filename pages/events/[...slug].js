@@ -7,10 +7,14 @@ import { useRouter } from "next/router";
 import { Fragment } from "react";
 
 function FilteredEventsPage() {
+
+
+  
   const router = useRouter();
 
   const filterData = router.query.slug;
 
+  
   if (!filterData) {
     return <p className="center">Loading...</p>;
   }
@@ -54,8 +58,11 @@ function FilteredEventsPage() {
 
   const date = new Date(numYear, numMonth - 1);
 
+
+  
   return (
     <Fragment>
+      
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </Fragment>
