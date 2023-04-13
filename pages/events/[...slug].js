@@ -4,10 +4,10 @@ import Button from "@/components/ui/button";
 import ErrorAlert from "@/components/ui/error-alert";
 import { getFilteredEvents } from "@/helpers/api-util";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { Fragment } from "react";
 
 function FilteredEventsPage(props) {
+
 
 
 
@@ -47,7 +47,7 @@ function FilteredEventsPage(props) {
         <title>Filtered Events</title>
         <meta
           name="description"
-          content={`All events for ${numMonth}/${numYear}`}
+          content={`All events for ${props.date.month}/${props.date.year}`}
         />
       </Head>
       <ResultsTitle date={date} />
@@ -84,5 +84,7 @@ export async function getServerSideProps(context) {
     },
   };
 }
+
+
 
 export default FilteredEventsPage;
